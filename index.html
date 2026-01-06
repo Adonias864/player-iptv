@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Player IPTV Online</title>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <style>
+    body {
+      background: #111;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 30px;
+    }
+    input {
+      width: 80%;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: none;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-left: 10px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+    }
+    video {
+      margin-top: 20px;
+      width: 90%;
+      max-width: 900px;
+      background: #000;
+    }
+  </style>
+</head>
+<body>
+
+<h2>📺 Player IPTV Online</h2>
+
+<input type="text" id="url" placeholder="Cole aqui o link .m3u8">
+<button onclick="play()">Reproduzir</button>
+
+<br>
+
+<video id="video" controls></video>
+
+<script>
+function play() {
+  var video = document.getElementById('video');
+  var url = document.getElementById('url').value;
+
+  if (Hls.isSupported()) {
+    var hls = new Hls();
+    hls.loadSource(url);
+    hls.attachMedia(video);
+  } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+    video.src = url;
+  } else {
+    alert("Seu navegador não suporta HLS");
+  }
+}
+</script>
+
+</body>
+</html>
